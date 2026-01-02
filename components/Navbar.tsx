@@ -83,7 +83,7 @@ export default function Navbar() {
                     className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/20 md:px-4"
                   >
                     <span className="h-2 w-2 rounded-full bg-blue-400" />
-                    <span className="hidden sm:inline">Blindspot</span>
+                    <span>Blindspot</span>
                   </Link>
                   <nav className="hidden md:flex flex-1 items-center justify-center gap-2 text-sm font-medium text-ink-100">
                     {renderLinks()}

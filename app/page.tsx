@@ -1,14 +1,19 @@
 'use client';
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useState } from "react";
 
 const fadeIn = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeOut", delay }
+  viewport: { once: true, amount: 0.3, margin: "0px 0px -100px 0px" },
+  transition: { 
+    duration: 0.8, 
+    ease: [0.16, 1, 0.3, 1],
+    delay 
+  }
 });
 
 const staggerContainer = {
@@ -23,15 +28,17 @@ const staggerContainer = {
 
 export default function LandingPage() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const shouldReduceMotion = useReducedMotion();
+  const [isYearly, setIsYearly] = useState(false);
 
   return (
     <div className="space-y-20 md:space-y-24">
       {/* Hero Section */}
       <motion.section
         className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 p-8 md:p-16 lg:p-20 shadow-2xl backdrop-blur-xl"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
 
         <div className="relative grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center lg:gap-14">
@@ -189,7 +196,8 @@ export default function LandingPage() {
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400"
             >
               How it works
@@ -197,8 +205,8 @@ export default function LandingPage() {
             <motion.h2
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-2 text-4xl font-bold text-white md:text-5xl"
             >
               From upload to{' '}
@@ -264,10 +272,14 @@ export default function LandingPage() {
           ].map((item, idx) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+              transition={{ 
+                delay: idx * 0.08, 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/20"
             >
@@ -293,7 +305,8 @@ export default function LandingPage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400"
           >
             Why students stay
@@ -301,8 +314,8 @@ export default function LandingPage() {
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-3 text-3xl font-bold text-white md:text-4xl"
           >
             Not another{' '}
@@ -331,10 +344,14 @@ export default function LandingPage() {
           ].map((item, idx) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+              transition={{ 
+                delay: idx * 0.1, 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
               whileHover={{ y: -5, scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-xl"
             >
@@ -361,10 +378,14 @@ export default function LandingPage() {
         ].map((stat, idx) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+            transition={{ 
+              delay: idx * 0.08, 
+              duration: 0.7, 
+              ease: [0.16, 1, 0.3, 1] 
+            }}
             whileHover={{ scale: 1.05 }}
             className="text-center"
           >
@@ -382,7 +403,8 @@ export default function LandingPage() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl font-bold text-white md:text-5xl"
           >
             What students are{' '}
@@ -393,8 +415,8 @@ export default function LandingPage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 text-xl text-ink-300"
           >
             Real results from trap-first training
@@ -423,10 +445,14 @@ export default function LandingPage() {
           ].map((testimonial, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+              transition={{ 
+                delay: index * 0.1, 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
               whileHover={{ y: -5, scale: 1.02 }}
               className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${testimonial.gradient} p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-xl`}
             >
@@ -447,7 +473,8 @@ export default function LandingPage() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl font-bold text-white md:text-5xl"
           >
             Frequently asked{' '}
@@ -458,8 +485,8 @@ export default function LandingPage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 text-xl text-ink-300"
           >
             Everything you need to know
@@ -490,10 +517,14 @@ export default function LandingPage() {
           ].map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+              transition={{ 
+                delay: index * 0.08, 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
               whileHover={{ y: -3, scale: 1.01 }}
               className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${faq.gradient} p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-xl`}
             >
@@ -510,8 +541,9 @@ export default function LandingPage() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-white md:text-5xl"
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl font-bold text-white md:text-4xl"
           >
             Simple pricing for{' '}
             <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
@@ -521,155 +553,303 @@ export default function LandingPage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-4 text-xl text-ink-300"
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-3 text-base text-ink-400"
           >
             Choose the plan that fits your study needs
           </motion.p>
-        </div>
-        <div className="grid gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/[0.02] p-8 shadow-2xl backdrop-blur-xl md:grid-cols-2 lg:grid-cols-3 md:p-10">
-          {/* Free Plan */}
+          
+          {/* Toggle Switch */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -5, scale: 1.02 }}
-            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-xl"
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 flex items-center justify-center gap-4"
           >
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white">Free</h3>
-              <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-5xl font-bold text-white">$0</span>
-                <span className="text-sm text-ink-400">/forever</span>
-              </div>
-              <p className="mt-3 text-sm text-ink-300">Perfect for trying out Blindspot</p>
-            </div>
-            <ul className="mb-8 space-y-4 text-sm text-ink-200">
-              {["Up to 5 Blindspot Reports", "Basic mistake detection", "Library access", "Progress tracking"].map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-400" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            {!isLoggedIn ? (
-              <Link
-                href="/login"
-                className="block w-full rounded-xl border-2 border-white/20 bg-white/5 px-4 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm transition-all hover:border-blue-500/50 hover:bg-blue-500/10"
-              >
-                Get Started Free
-              </Link>
-            ) : (
-              <Link
-                href="/scan"
-                className="block w-full rounded-xl border-2 border-white/20 bg-white/5 px-4 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm transition-all hover:border-blue-500/50 hover:bg-blue-500/10"
-              >
-                Start Scanning
-              </Link>
+            <span className={`text-sm font-medium ${!isYearly ? 'text-white' : 'text-ink-400'}`}>
+              Pay monthly
+            </span>
+            <button
+              onClick={() => setIsYearly(!isYearly)}
+              className={`relative h-7 w-12 rounded-full transition-colors duration-300 ${
+                isYearly ? 'bg-blue-500' : 'bg-white/20'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-white transition-transform duration-300 ${
+                  isYearly ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
+            </button>
+            <span className={`text-sm font-medium ${isYearly ? 'text-white' : 'text-ink-400'}`}>
+              Pay yearly
+            </span>
+            {isYearly && (
+              <span className="ml-2 rounded-full bg-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-300">
+                Save up to 20%
+              </span>
             )}
+          </motion.div>
+        </div>
+        
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {/* Free Plan */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-xl transition-all duration-300 hover:border-white/20"
+          >
+            <div className="mb-4">
+              <h3 className="mb-1 text-2xl font-bold text-white">Free</h3>
+              <p className="mb-2 text-sm text-ink-400">Try out Blindspot</p>
+              <div className="mb-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-white">$0</span>
+                <span className="text-sm text-ink-400">/ {isYearly ? 'Year' : 'Month'}</span>
+              </div>
+              
+              {!isLoggedIn ? (
+                <Link
+                  href="/login"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/20 bg-white/5 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                >
+                  Get started →
+                </Link>
+              ) : (
+                <Link
+                  href="/scan"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/20 bg-white/5 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                >
+                  Get started →
+                </Link>
+              )}
+            </div>
+            
+            <div className="mb-4 flex-1">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-500">Featured Include:</p>
+              <div className="space-y-2.5">
+                {["Up to 5 Blindspot Reports", "Basic mistake detection", "Library access", "Progress tracking"].map((feature) => (
+                  <div key={feature} className="flex items-start gap-2.5">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-ink-300">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs leading-relaxed text-ink-400">
+                Track your mistakes automatically, get AI to identify blindspots, set reminders and study efficiently.
+              </p>
+            </div>
+            
+            <Link href="#" className="text-center text-xs text-ink-500 hover:text-ink-400">
+              See compare →
+            </Link>
           </motion.div>
 
           {/* Student Plan - Most Popular */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ y: -8, scale: 1.03 }}
-            className="group relative overflow-hidden rounded-2xl border-2 border-blue-500/60 bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 p-8 shadow-2xl shadow-blue-500/20 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/80 hover:shadow-3xl hover:shadow-blue-500/30 lg:scale-105"
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group relative z-10 flex flex-col overflow-hidden rounded-3xl border-2 border-blue-500/40 bg-gradient-to-br from-blue-900/60 via-indigo-900/60 to-purple-900/60 p-4 backdrop-blur-xl transition-all duration-300 hover:border-blue-500/60"
           >
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <span className="rounded-full border border-blue-500/60 bg-gradient-to-r from-blue-500/30 to-indigo-500/30 px-4 py-1.5 text-xs font-bold text-blue-200 backdrop-blur-sm shadow-lg">
-                Most Popular
-              </span>
-            </div>
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white">Student</h3>
-              <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-5xl font-bold text-white">$9</span>
-                <span className="text-sm text-blue-200">/month</span>
+            <div className="mb-4">
+              <div className="mb-2 flex items-center justify-between">
+                <h3 className="text-2xl font-bold text-white">Student</h3>
+                <span className="inline-flex items-center rounded-full bg-blue-500/30 border border-blue-400/30 px-2.5 py-1 text-xs font-semibold text-blue-200">
+                  Popular
+                </span>
               </div>
-              <p className="mt-3 text-sm font-medium text-blue-200">Best value for active students</p>
+              <p className="mb-2 text-sm text-ink-300">Manage your blindspots</p>
+              {isYearly && (
+                <span className="mb-2 inline-block rounded-full bg-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-300">
+                  Save up to 20%
+                </span>
+              )}
+              <div className="mb-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-white">${isYearly ? 72 : 9}</span>
+                <span className="text-sm text-ink-300">/ {isYearly ? 'Year' : 'Month'}</span>
+              </div>
+              
+              {!isLoggedIn ? (
+                <Link
+                  href="/login"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/30 bg-white/10 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:bg-white/20"
+                >
+                  Get started →
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/30 bg-white/10 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:bg-white/20"
+                >
+                  Get started →
+                </Link>
+              )}
             </div>
-            <ul className="mb-8 space-y-4 text-sm text-ink-100">
-              {["Unlimited Blindspot Reports", "Advanced mistake detection", "Priority processing", "Export reports (PDF)", "Email support"].map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-400" />
-                  <span className="font-medium">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            {!isLoggedIn ? (
-              <Link
-                href="/login"
-                className="group relative block w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3.5 text-center text-sm font-bold text-white shadow-2xl shadow-blue-500/30 transition-all hover:scale-105 hover:shadow-3xl hover:shadow-blue-500/40"
-              >
-                <span className="relative z-10">Start Student Plan</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 transition-opacity group-hover:opacity-100" />
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="group relative block w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3.5 text-center text-sm font-bold text-white shadow-2xl shadow-blue-500/30 transition-all hover:scale-105 hover:shadow-3xl hover:shadow-blue-500/40"
-              >
-                <span className="relative z-10">Upgrade Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 transition-opacity group-hover:opacity-100" />
-              </Link>
-            )}
+            
+            <div className="mb-4 flex-1">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-400">Everything in Free, plus:</p>
+              <div className="space-y-2.5">
+                {["Unlimited Blindspot Reports", "Advanced mistake detection", "Priority processing", "Export reports (PDF)", "Email support"].map((feature) => (
+                  <div key={feature} className="flex items-start gap-2.5">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-ink-200">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs leading-relaxed text-ink-300">
+                Access detailed reports, set study goals, track progress, export your data, and get priority support.
+              </p>
+            </div>
+            
+            <Link href="#" className="text-center text-xs text-ink-400 hover:text-ink-300">
+              See compare →
+            </Link>
           </motion.div>
 
           {/* Pro Plan */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ y: -5, scale: 1.02 }}
-            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/40 hover:shadow-xl lg:col-span-1"
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-xl transition-all duration-300 hover:border-white/20"
           >
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white">Pro</h3>
-              <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-5xl font-bold text-white">$19</span>
-                <span className="text-sm text-ink-400">/month</span>
+            <div className="mb-4">
+              <h3 className="mb-1 text-2xl font-bold text-white">Pro</h3>
+              <p className="mb-2 text-sm text-ink-400">Advanced exam prep</p>
+              {isYearly && (
+                <span className="mb-2 inline-block rounded-full bg-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-300">
+                  Save up to 20%
+                </span>
+              )}
+              <div className="mb-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-white">${isYearly ? 152 : 19}</span>
+                <span className="text-sm text-ink-400">/ {isYearly ? 'Year' : 'Month'}</span>
               </div>
-              <p className="mt-3 text-sm text-ink-300">For serious exam prep</p>
+              
+              {!isLoggedIn ? (
+                <Link
+                  href="/login"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/20 bg-white/5 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                >
+                  Get started →
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="mb-4 block w-full rounded-2xl border-2 border-white/20 bg-white/5 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                >
+                  Get started →
+                </Link>
+              )}
             </div>
-            <ul className="mb-8 space-y-4 text-sm text-ink-200">
-              {["Everything in Student", "AI-powered insights", "Custom study plans", "Team collaboration", "Priority support"].map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-purple-400" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            {!isLoggedIn ? (
+            
+            <div className="mb-4 flex-1">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-500">Everything in Student, plus:</p>
+              <div className="space-y-2.5">
+                {["AI-powered insights", "Custom study plans", "Team collaboration", "Priority support", "Advanced analytics"].map((feature) => (
+                  <div key={feature} className="flex items-start gap-2.5">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-ink-300">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs leading-relaxed text-ink-400">
+                Get AI-powered insights, create custom study plans, collaborate with teams, and access advanced analytics.
+              </p>
+            </div>
+            
+            <Link href="#" className="text-center text-xs text-ink-500 hover:text-ink-400">
+              See compare →
+            </Link>
+          </motion.div>
+          
+          {/* Enterprise Plan */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3, margin: "0px 0px -80px 0px" }}
+            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4 }}
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-xl transition-all duration-300 hover:border-white/20"
+          >
+            <div className="mb-4">
+              <h3 className="mb-1 text-2xl font-bold text-white">Enterprise</h3>
+              <p className="mb-2 text-sm text-ink-400">Custom solutions</p>
+              <div className="mb-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-white">Custom</span>
+              </div>
+              
               <Link
                 href="/login"
-                className="block w-full rounded-xl border-2 border-white/20 bg-white/5 px-4 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm transition-all hover:border-purple-500/50 hover:bg-purple-500/10"
+                className="mb-4 block w-full rounded-2xl border-2 border-white/20 bg-white/5 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
               >
-                Go Pro
+                Get started →
               </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="block w-full rounded-xl border-2 border-white/20 bg-white/5 px-4 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm transition-all hover:border-purple-500/50 hover:bg-purple-500/10"
-              >
-                Upgrade to Pro
-              </Link>
-            )}
+            </div>
+            
+            <div className="mb-4 flex-1">
+              <div className="space-y-2.5">
+                <div className="flex items-start gap-2.5">
+                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-ink-300">Everything in Pro</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-ink-300">Dedicated support</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs leading-relaxed text-ink-400">
+                Enjoy customized support with a dedicated success partner tailored to your organization's needs.
+              </p>
+            </div>
+            
+            <Link href="#" className="text-center text-xs text-ink-500 hover:text-ink-400">
+              See compare →
+            </Link>
           </motion.div>
         </div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-8 text-center text-sm text-ink-400"
+          transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 text-center"
         >
-          All plans include a 7-day free trial. Cancel anytime. Student discount available with valid .edu email.
-        </motion.p>
+          <p className="text-xs text-ink-500">
+            All plans include a <span className="text-ink-400">7-day free trial</span>. Cancel anytime. Student discount available with valid .edu email.
+          </p>
+        </motion.div>
       </motion.section>
 
       {/* CTA Section */}
@@ -708,7 +888,8 @@ export default function LandingPage() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
               Ready to eliminate your{' '}
@@ -719,8 +900,8 @@ export default function LandingPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-2xl text-xl text-ink-200"
             >
               Start training with trap-first cards today. Login required to access your personalized dashboard.
@@ -728,8 +909,8 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              viewport={{ once: true, amount: 0.3, margin: "0px 0px -50px 0px" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mt-10"
             >
               <Link

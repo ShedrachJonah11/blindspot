@@ -14,8 +14,16 @@ html.light {
   color-scheme: light;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply font-sans min-h-screen antialiased;
+  /* Optimize for smooth scrolling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html.dark body {
@@ -89,4 +97,12 @@ html.light ::-webkit-scrollbar-thumb {
 
 .animate-shimmer {
   animation: shimmer 3s infinite;
+}
+
+/* Optimize motion elements for smooth scrolling */
+[data-framer-motion] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

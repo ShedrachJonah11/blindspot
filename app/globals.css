@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  @apply font-sans min-h-screen antialiased;
+}
+
+html.dark body {
+  @apply bg-[#0f1729] text-ink-50;
+  background: radial-gradient(circle at 20% 20%, rgba(61, 95, 152, 0.08), transparent 25%),
+    radial-gradient(circle at 80% 0%, rgba(45, 70, 120, 0.1), transparent 30%),
+    #0f1729;
+}
+
+html.light body {
+  @apply bg-white text-gray-900;
+  background: radial-gradient(circle at 20% 20%, rgba(61, 95, 152, 0.05), transparent 25%),
+    radial-gradient(circle at 80% 0%, rgba(45, 70, 120, 0.05), transparent 30%),
+    #ffffff;
+}
+
+a {
+  @apply text-brand-200 transition-colors hover:text-brand-100;
+}
+
+.card {
+  @apply rounded-2xl shadow-card;
+}
+
+html.dark .card {
+  @apply bg-[#131c2f] border border-white/5;
+}
+
+html.light .card {
+  @apply bg-gray-50 border border-gray-200;
+}
+
+.pill {
+  @apply rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-medium text-ink-100;
+}
+
+.badge {
+  @apply rounded-full px-2.5 py-1 text-xs font-semibold;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0f1729;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #1d2f4f;
+  border-radius: 9999px;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 9999px;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}

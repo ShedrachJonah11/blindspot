@@ -830,7 +830,7 @@ export default function LandingPage() {
             
             <div className="mb-3">
               <p className="text-xs leading-relaxed text-ink-400">
-                Enjoy customized support with a dedicated success partner tailored to your organization's needs.
+                Enjoy customized support with a dedicated success partner tailored to your organization&apos;s needs.
               </p>
             </div>
             

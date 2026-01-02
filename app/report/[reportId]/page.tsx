@@ -15,8 +15,6 @@ export default function ReportPage() {
   const store = useBlindspotStore();
   const report = store.getReport(params.reportId);
 
-  const confidence = useMemo(() => store.getConfidence(params.reportId), [store, params.reportId]);
-
   useEffect(() => {
     if (!isLoggedIn) {
       router.push('/login');
@@ -26,6 +24,8 @@ export default function ReportPage() {
   if (!isLoggedIn) {
     return null;
   }
+
+  const confidence = useMemo(() => store.getConfidence(params.reportId), [store, params.reportId]);
 
   if (!report) {
     return (
@@ -66,7 +66,7 @@ export default function ReportPage() {
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-sm font-bold text-white">Your Progress</p>
-            <p className="text-xs text-ink-300 mt-1">Mark items as &quot;Got it&quot; to track your confidence</p>
+            <p className="text-xs text-ink-300 mt-1">Mark items as "Got it" to track your confidence</p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold text-white">{Math.round(confidence * 100)}%</p>
@@ -80,7 +80,7 @@ export default function ReportPage() {
           />
         </div>
         <p className="mt-2 text-xs text-ink-400">
-          {report.items.filter(item => store.itemStatuses[item.id]?.status === "got_it").length} of {report.items.length} items marked as &quot;Got it&quot;
+          {report.items.filter(item => store.itemStatuses[item.id]?.status === "got_it").length} of {report.items.length} items marked as "Got it"
         </p>
       </div>
 
